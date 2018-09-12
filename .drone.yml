@@ -10,7 +10,8 @@ pipeline:
 
   api_tests:
     group: tests
-    image: nervesproject/nerves_system_br:1.4.5
+    #image: nervesproject/nerves_system_br:1.4.5
+    image: bitwalker/alpine-elixir-phoenix:latest
     commands:
       - mix local.hex --force
       - mix local.rebar --force
