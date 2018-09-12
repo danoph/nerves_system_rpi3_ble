@@ -1,0 +1,29 @@
+pipeline:
+  restore-cache:
+    image: drillster/drone-volume-cache
+    restore: true
+    ttl: 7
+    mount:
+      #- /drone/docker
+    volumes:
+      - /tmp/cache:/cache
+
+  api_tests:
+    group: tests
+    image: nervesproject/nerves_system_br:1.4.5
+    commands:
+      - mix local.hex --force
+      - mix local.rebar --force
+      - mix archive.install hex nerves_bootstrap "~> 1.0" --force
+      - mix deps.get
+      - mix hex.build
+      - mix compile
+      #- mix nerves.artifact
+
+  rebuild-cache:
+    image: drillster/drone-volume-cache
+    rebuild: true
+    mount:
+      #- /drone/docker
+    volumes:
+      - /tmp/cache:/cache

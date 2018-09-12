@@ -1,7 +1,7 @@
-defmodule NervesSystemRpi3.MixProject do
+defmodule NervesSystemRpi3BLE.MixProject do
   use Mix.Project
 
-  @app :nerves_system_rpi3
+  @app :nerves_system_rpi3_ble
   @version Path.join(__DIR__, "VERSION")
            |> File.read!()
            |> String.trim()
@@ -26,7 +26,7 @@ defmodule NervesSystemRpi3.MixProject do
   end
 
   defp bootstrap(args) do
-    System.put_env("MIX_TARGET", "rpi3")
+    System.put_env("MIX_TARGET", "rpi3_ble")
     Application.start(:nerves_bootstrap)
     Mix.Task.run("loadconfig", args)
   end
@@ -63,10 +63,10 @@ defmodule NervesSystemRpi3.MixProject do
 
   defp package do
     [
-      maintainers: ["Frank Hunleth", "Justin Schneck"],
+      maintainers: ["Daniel Errante"],
       files: package_files(),
       licenses: ["Apache 2.0"],
-      links: %{"Github" => "https://github.com/nerves-project/#{@app}"}
+      links: %{"Github" => "https://github.com/danoph/#{@app}"}
     ]
   end
 
